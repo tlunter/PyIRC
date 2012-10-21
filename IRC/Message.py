@@ -24,7 +24,8 @@ class Message(object):
     """
     _regex = r':((?P<USERNAME>[^!]+)!)?(?P<HOSTNAME>\S+)\s+(?P<ACTION>\S+)\s+:?(?P<CHANNEL>\S+)\s*(?:(?::|[+-]+)(?P<MESSAGE>.*))?'
 
-    def __init__(self, username=None, hostname=None, action=None, channel=None, msg=None):
+    def __init__(self, username=None, hostname=None, action=None,
+                 channel=None, msg=None):
         """Inits an IRC Message"""
 
         self.raw_msg = ""
@@ -36,16 +37,18 @@ class Message(object):
 
     def __repr__(self):
         return "Message(username=%r, hostname=%r, action=%r, channel=%r, msg=%r)" % (
-            self.username, self.hostname, self.action, self.channel, self.msg)
+                self.username, self.hostname, self.action, self.channel, self.msg)
 
     def __eq__(self, other):
-        return (self.username == other.username and self.hostname == other.hostname and
-                self.action == other.action and self.channel == other.channel and
+        return (self.username == other.username and
+                self.hostname == other.hostname and
+                self.action == other.action and
+                self.channel == other.channel and
                 self.msg == other.msg)
 
     def __hash__(self):
         hashables = (self.username, self.hostname, self.action,
-                self.channel, self.msg)
+                     self.channel, self.msg)
 
         result = 0
         for value in hashables:
